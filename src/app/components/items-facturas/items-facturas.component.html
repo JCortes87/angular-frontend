@@ -1,0 +1,32 @@
+<table *ngIf="items.length > 0" class="table table-striped my-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let it of items; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ it.producto.nombre }} {{ it.producto.marca }}</td>
+            <td>{{ it.producto.precio }}</td>
+            <td><input class="form-control" (change)="calcularValor(i)" type="number" [(ngModel)]="items[i].cantidad"></td>
+            <td>{{ items[i].importe }}</td>
+            <td>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteItem(i)">
+                    <i class="bi bi-trash2"></i>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5 *ngIf="items.length > 0">Total: <span class="badge badge-secondary"></span> {{ granTotal }} </h5>
+                <button type="submit" class="btn btn-outline-primary my-3" (click)="setItems()">Adjuntar productos</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

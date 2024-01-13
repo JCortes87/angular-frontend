@@ -1,0 +1,41 @@
+<div class="card" style="width: 18rem;">
+    <img src="assets/images/user.jpg" class="card-img" alt="Foto usuario">
+    <div class="card-body">
+        <h5 class="card-title">{{ cliente.nombre }} {{ cliente.apellido }}</h5>
+        <p class="card-text">Creado el {{ cliente.fechaCreado }}</p>
+    </div>
+    <p class="card-text mx-5"><small class="text-body-secondary">Contactar al correo <b>{{ cliente.correo }}</b></small>
+    </p>
+    <div class="card-body">
+        <a [routerLink]="['/facturas', cliente.id]" class="btn btn-outline-primary mx-3">Crear factura</a>
+        <a routerLink="/clientes" class="btn btn-outline-danger">Volver</a>
+    </div>
+</div>
+<div *ngIf="facturas.length == 0 else tableFacturas" class="alert alert-info my-6" role="alert">
+    {{ cliente.nombre }} {{ cliente.apellido }} no tiene facturas asociadas
+</div>
+<ng-template #tableFacturas>
+    <table class="table table-striped my-5">
+        <thead>
+            <tr>
+                <th scope="col">Folio</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Fecha de compra</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let factura of facturas">
+                <th scope="row">{{ factura.id }}</th>
+                <td>{{ factura.descripcion }}</td>
+                <td>{{ factura.observacion }}</td>
+                <td>{{ factura.fechaCreado }}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/factura', factura.id]">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </td>
+            </tr>
+    </table>
+</ng-template>

@@ -1,0 +1,32 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Datos de la factura {{ factura.id }}</h5>
+      <p class="card-text"><b>Descripción:</b> {{ factura.descripcion }}</p>
+      <p><b>Observaciones: </b> {{ factura.observacion }}  </p>
+      <p><b>Fecha: </b> {{ factura.fechaCreado }} </p>
+      <h5 class="card-title">Datos del cliente</h5>
+      <p><b><small>{{ factura.cliente.nombre }} {{ factura.cliente.apellido }}</small></b></p>
+      <p><small>{{factura.cliente.correo }}</small></p>
+      <a class="btn btn-primary" [routerLink]="['/cliente',factura.cliente.id]">Regresar</a>
+    </div>
+</div>
+<table class="table table-striped my-4">
+  <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let linea of factura.items">
+      <td>{{ linea.producto.id }}</td>
+      <td>{{ linea.producto.nombre }} {{ linea.producto.marca }}</td>
+      <td>{{ linea.producto.precio }}</td>
+      <td>{{ linea.cantidad }}</td>
+      <td>{{ linea.producto.precio * linea.cantidad }}</td>
+    </tr>
+  </tbody> 
+  <h5><b>Total valor factura: {{ factura.total }}</b></h5>

@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    <thead class="table table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cli of clientes">
+            <th scope="row">{{ cli.id }}</th>
+            <td>{{ cli.nombre }}</td>
+            <td>{{ cli.apellido }}</td>
+            <td>{{ cli.correo }}</td>
+            <td>{{ cli.fechaCreado }}</td>
+            <td>
+                <button type="button" class="btn btn-outline-success" [routerLink]="['/cliente', cli.id]">
+                    <i class="bi bi-eye"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

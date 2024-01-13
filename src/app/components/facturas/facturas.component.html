@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Crear factura para: </h5>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">#</label>
+                <input type="number" class="form-control" name="clienteId" [(ngModel)]="cliente.id" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cliente</label>
+                <input type="text" class="form-control" name="nombre"
+                    [(ngModel)]="cliente.nombre + ' ' + cliente.apellido" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <input type="text" class="form-control" name="descripcion"
+                    [(ngModel)]="factura.descripcion">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Observaciones</label>
+                <textarea class="form-control" name="observacion"
+                    [(ngModel)]="factura.observacion"></textarea>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text"><b>Productos</b></label>
+                <select class="form-select" [(ngModel)]="selected" name="instrumentos">
+                    <option [value]="selected" selected>Seleccione un producto...</option>
+                    <option *ngFor="let prods of productos; let i = index" [ngValue]="prods">{{ prods.nombre }} {{ prods.marca }}
+                    </option>
+                </select>
+                <button *ngIf="selected.id > 0" type="button" class="btn btn-outline-primary" 
+                    (click)="itemsF.getSelectedProduct()" (click)="resetSelect()">Añadir</button> 
+            </div>
+            <button type="submit" class="btn btn-outline-primary mx-2" (click)="saveFactura()">Submit</button>
+            <button type="button" class="btn btn-outline-danger" [routerLink]="['/cliente', cliente.id]">Volver</button>
+        </form>
+    </div>
+</div>
+<app-items-facturas #itemsF [instrumento]="selected"  (lineas)="getLineas( $event )" ></app-items-facturas>
